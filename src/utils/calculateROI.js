@@ -6,11 +6,35 @@ export const calculateROI = ({
 	lifetimeValue,
 	closeRate, // optional: only for service-based
 }) => {
-	// Calculate visitors from search volume and CTR
+	// Guard clause: if searchVolume is 0 (or less), return default values.
+	if (searchVolume <= 0) {
+		if (typeof closeRate !== 'undefined') {
+			return {
+				visitors: 0,
+				leads: 0,
+				conversions: 0,
+				averageOrderValue,
+				netRevenue: 0,
+				totalLifetimeValue: 0,
+				monthlyROI: 0,
+			};
+		} else {
+			return {
+				visitors: 0,
+				conversions: 0,
+				averageOrderValue,
+				netRevenue: 0,
+				totalLifetimeValue: 0,
+				monthlyROI: 0,
+			};
+		}
+	}
+
+	// Continue with calculations if searchVolume is valid
 	const visitors = Math.floor(searchVolume * (ctr / 100));
 
 	if (typeof closeRate !== 'undefined') {
-		// Service-Based SEO: conversionRate converts visitors to leads, then closeRate converts leads to customers
+		// Service-Based SEO
 		const leads = Math.floor(visitors * (conversionRate / 100));
 		const conversions = Math.floor(leads * (closeRate / 100));
 		const netRevenue = conversions * averageOrderValue;
@@ -26,7 +50,7 @@ export const calculateROI = ({
 			monthlyROI,
 		};
 	} else {
-		// E-Commerce SEO: conversionRate directly converts visitors to customers
+		// E-Commerce SEO
 		const conversions = Math.floor(visitors * (conversionRate / 100));
 		const netRevenue = conversions * averageOrderValue;
 		const totalLifetimeValue = conversions * lifetimeValue;

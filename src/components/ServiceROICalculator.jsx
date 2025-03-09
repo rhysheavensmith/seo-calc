@@ -70,12 +70,12 @@ const ServiceROICalculator = () => {
 	];
 
 	const initialInputs = {
-		searchVolume: 300,
-		ctr: 10,
-		conversionRate: 20,
-		closeRate: 50,
-		averageOrderValue: 200,
-		lifetimeValue: 200,
+		searchVolume: 0,
+		ctr: 0,
+		conversionRate: 0,
+		closeRate: 0,
+		averageOrderValue: 0,
+		lifetimeValue: 0,
 	};
 
 	return (

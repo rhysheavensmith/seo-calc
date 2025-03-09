@@ -28,7 +28,7 @@ const CalculatorInputs = ({ fields, handleChange, inputs }) => {
 							<input
 								type='range'
 								name={field.name}
-								min={field.min}
+								min={0}
 								max={field.max}
 								step={field.step}
 								value={inputs[field.name]}
@@ -42,7 +42,7 @@ const CalculatorInputs = ({ fields, handleChange, inputs }) => {
 									</span>
 								)}
 								<input
-									type='text'
+									type='number'
 									name={field.name}
 									onChange={handleChange}
 									value={inputs[field.name]}
